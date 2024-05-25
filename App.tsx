@@ -3,12 +3,12 @@ import {
   Roboto_700Bold,
   useFonts,
 } from '@expo-google-fonts/roboto'
-import { config as gluestackConfig } from '@gluestack-ui/config'
 import { GluestackUIProvider } from '@gluestack-ui/themed'
 import { StatusBar } from 'expo-status-bar'
 import { View } from 'react-native'
 
-import { SplashScreen } from '@/screens/splash-screen'
+import { Loading } from '@/components/loading'
+import { theme } from '@/theme'
 
 export default function App() {
   const [hasLoadedFonts] = useFonts({
@@ -17,9 +17,9 @@ export default function App() {
   })
 
   return (
-    <GluestackUIProvider config={gluestackConfig}>
+    <GluestackUIProvider config={theme}>
       <StatusBar style="light" />
-      {hasLoadedFonts ? <View /> : <SplashScreen />}
+      {hasLoadedFonts ? <View /> : <Loading />}
     </GluestackUIProvider>
   )
 }
