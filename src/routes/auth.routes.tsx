@@ -6,14 +6,14 @@ import {
 import { SignInScreen } from '@/screens/sign-in-screen'
 import { SignUpScreen } from '@/screens/sign-up-screen'
 
-type AuthRoutes = {
+type Routes = {
   'sign-in': undefined
   'sign-up': undefined
 }
 
-export type AuthNavigatorRouterProps = NativeStackNavigationProp<AuthRoutes>
+export type AuthNavigatorRouterProps = NativeStackNavigationProp<Routes>
 
-const { Navigator, Screen } = createNativeStackNavigator<AuthRoutes>()
+const { Navigator, Screen } = createNativeStackNavigator<Routes>()
 
 export function AuthRoutes() {
   return (
