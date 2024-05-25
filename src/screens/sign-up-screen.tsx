@@ -3,11 +3,12 @@ import {
   Center,
   Heading,
   ImageBackground,
-  SafeAreaView,
   ScrollView,
   Text,
   VStack,
 } from '@gluestack-ui/themed'
+import { useNavigation } from '@react-navigation/native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import backgroundImg from '@/assets/background.png'
 import LogoImg from '@/assets/logo.svg'
@@ -15,19 +16,26 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 export function SignUpScreen() {
+  const navigation = useNavigation()
+
+  function handleReturnToLogin() {
+    navigation.goBack()
+  }
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
     >
-      <VStack flex={1} bgColor="$gray700">
+      <VStack flex={1}>
         <ImageBackground
           flex={1}
           source={backgroundImg}
+          defaultSource={backgroundImg}
           alt="Pessoas treinando"
           py="$24"
         >
-          <SafeAreaView flex={1}>
+          <SafeAreaView style={{ flex: 1 }}>
             <Center mb="$24">
               <LogoImg />
               <Text color="$gray100" fontSize="$sm">
@@ -53,7 +61,9 @@ export function SignUpScreen() {
             </Box>
 
             <Box px="$4" mt="auto" alignItems="center">
-              <Button variant="outline">Voltar para o login</Button>
+              <Button variant="outline" onPress={handleReturnToLogin}>
+                Voltar para o login
+              </Button>
             </Box>
           </SafeAreaView>
         </ImageBackground>

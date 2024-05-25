@@ -6,8 +6,8 @@ import {
 import { GluestackUIProvider } from '@gluestack-ui/themed'
 import { StatusBar } from 'expo-status-bar'
 
+import { Routes } from '@/routes'
 import { LoadingScreen } from '@/screens/loading-screen'
-import { SignInScreen } from '@/screens/sign-in-screen'
 import { theme } from '@/theme'
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <GluestackUIProvider config={theme}>
       <StatusBar style="light" />
-      {hasLoadedFonts ? <SignInScreen /> : <LoadingScreen />}
+      {hasLoadedFonts ? <Routes /> : <LoadingScreen />}
     </GluestackUIProvider>
   )
 }
