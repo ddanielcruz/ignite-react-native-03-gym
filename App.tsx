@@ -19,7 +19,7 @@ export default function App() {
   return (
     <GluestackUIProvider config={theme}>
       <StatusBar style="light" />
-      {!hasLoadedFonts ? <SignInScreen /> : <LoadingScreen />}
+      {hasLoadedFonts ? <SignInScreen /> : <LoadingScreen />}
     </GluestackUIProvider>
   )
 }
