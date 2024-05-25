@@ -5,9 +5,9 @@ import {
 } from '@expo-google-fonts/roboto'
 import { GluestackUIProvider } from '@gluestack-ui/themed'
 import { StatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
 
-import { Loading } from '@/components/loading'
+import { LoadingScreen } from '@/screens/loading-screen'
+import { SignInScreen } from '@/screens/sign-in-screen'
 import { theme } from '@/theme'
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <GluestackUIProvider config={theme}>
       <StatusBar style="light" />
-      {hasLoadedFonts ? <View /> : <Loading />}
+      {!hasLoadedFonts ? <SignInScreen /> : <LoadingScreen />}
     </GluestackUIProvider>
   )
 }
