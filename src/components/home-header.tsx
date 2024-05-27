@@ -1,22 +1,13 @@
 import { MaterialIcons } from '@expo/vector-icons'
-import { Heading, HStack, Icon, Text, VStack } from '@gluestack-ui/themed'
+import { Heading, Icon, Text, VStack } from '@gluestack-ui/themed'
 import { TouchableOpacity } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
+import { Header } from './layout/header'
 import { Avatar } from './ui/avatar'
 
 export function HomeHeader() {
-  const insets = useSafeAreaInsets()
-  const paddingTop = insets.top + 16 // Safe area top + 16px ($4)
-
   return (
-    <HStack
-      bgColor="$gray600"
-      pt={paddingTop}
-      pb="$4"
-      px="$8"
-      alignItems="center"
-    >
+    <Header>
       <Avatar
         source={{ uri: 'https://github.com/ddanielcruz.png' }}
         alt="Imagem do Daniel"
@@ -42,6 +33,6 @@ export function HomeHeader() {
           color="$gray200"
         />
       </TouchableOpacity>
-    </HStack>
+    </Header>
   )
 }
