@@ -20,7 +20,7 @@ type Routes = {
   exercise: undefined
 }
 
-export type AuthNavigatorRouterProps = BottomTabNavigationProp<Routes>
+export type AppNavigatorRouterProps = BottomTabNavigationProp<Routes>
 
 const { Navigator, Screen } = createBottomTabNavigator<Routes>()
 

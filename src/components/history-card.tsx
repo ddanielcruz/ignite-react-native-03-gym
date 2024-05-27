@@ -9,13 +9,15 @@ export function HistoryCard() {
       px="$5"
       py="$4"
       rounded="$md"
+      gap="$2"
     >
-      <VStack gap="$1">
+      <VStack gap="$1" flex={1}>
         <Heading
           color="$white"
           fontSize="$md"
           textTransform="capitalize"
           lineHeight="$md"
+          numberOfLines={1}
         >
           Costas
         </Heading>

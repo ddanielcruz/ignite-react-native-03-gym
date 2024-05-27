@@ -6,17 +6,21 @@ import {
   View,
   VStack,
 } from '@gluestack-ui/themed'
+import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 
 import { ExerciseCard } from '@/components/exercise-card'
 import { HomeHeader } from '@/components/home-header'
 import { Group } from '@/components/ui/group'
+import { AppNavigatorRouterProps } from '@/routes/app.routes'
 
 interface Exercise {
   name: string
 }
 
 export function HomeScreen() {
+  const navigation = useNavigation<AppNavigatorRouterProps>()
+
   const [exerciseGroups] = useState([
     'Costas',
     'Bíceps',
@@ -43,15 +47,20 @@ export function HomeScreen() {
     { name: 'Crucifixo' },
   ])
 
+  function handleOpenExercise() {
+    navigation.navigate('exercise')
+  }
+
   return (
     <VStack flex={1}>
       <HomeHeader />
 
       <FlatList
-        px="$8"
+        px="$4"
         my="$8"
         data={exerciseGroups}
         maxHeight="$10"
+        minHeight="$10"
         keyExtractor={(item) => item as string}
         renderItem={({ item }) => {
           const group = item as string
@@ -69,7 +78,7 @@ export function HomeScreen() {
         ItemSeparatorComponent={() => <View w="$3" />}
       />
 
-      <VStack flex={1} px="$8" pb="$8">
+      <VStack flex={1} px="$4" pb="$8">
         <HStack justifyContent="space-between" mb="$5">
           <Heading color="$gray200" fontSize="$md">
             Exercícios
@@ -84,7 +93,12 @@ export function HomeScreen() {
           keyExtractor={(item) => (item as Exercise).name}
           renderItem={({ item }) => {
             const exercise = item as Exercise
-            return <ExerciseCard exercise={exercise.name} />
+            return (
+              <ExerciseCard
+                exercise={exercise.name}
+                onPress={() => handleOpenExercise()}
+              />
+            )
           }}
           ItemSeparatorComponent={() => <View h="$3" />}
           showsVerticalScrollIndicator={false}

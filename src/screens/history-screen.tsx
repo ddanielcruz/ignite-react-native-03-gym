@@ -22,7 +22,8 @@ export function HistoryScreen() {
       <ScreenHeader title="Histórico de Exercícios" />
 
       <SectionList
-        p="$8"
+        py="$8"
+        px="$4"
         pt={0}
         gap="$3"
         sections={exercises}
