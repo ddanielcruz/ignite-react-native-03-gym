@@ -5,6 +5,7 @@ import {
 } from '@expo-google-fonts/roboto'
 import { GluestackUIProvider } from '@gluestack-ui/themed'
 import { StatusBar } from 'expo-status-bar'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { Routes } from '@/routes'
 import { LoadingScreen } from '@/screens/loading-screen'
@@ -19,7 +20,9 @@ export default function App() {
   return (
     <GluestackUIProvider config={theme}>
       <StatusBar style="light" />
-      {hasLoadedFonts ? <Routes /> : <LoadingScreen />}
+      <SafeAreaProvider>
+        {hasLoadedFonts ? <Routes /> : <LoadingScreen />}
+      </SafeAreaProvider>
     </GluestackUIProvider>
   )
 }
