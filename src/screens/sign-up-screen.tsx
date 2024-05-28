@@ -8,6 +8,7 @@ import {
   VStack,
 } from '@gluestack-ui/themed'
 import { useNavigation } from '@react-navigation/native'
+import { Controller, useForm } from 'react-hook-form'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import backgroundImg from '@/assets/background.png'
@@ -15,11 +16,28 @@ import LogoImg from '@/assets/logo.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+type FormData = {
+  name: string
+  email: string
+  password: string
+}
+
 export function SignUpScreen() {
   const navigation = useNavigation()
+  const { handleSubmit, control } = useForm<FormData>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  })
 
   function handleReturnToLogin() {
     navigation.goBack()
+  }
+
+  function onSubmit(data: FormData) {
+    console.log(data)
   }
 
   return (
@@ -48,16 +66,63 @@ export function SignUpScreen() {
             </Heading>
 
             <Box gap="$4" px="$4">
-              <Input placeholder="Nome" autoComplete="name" />
-              <Input
-                placeholder="E-mail"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoComplete="email"
+              <Controller
+                control={control}
+                name="name"
+                rules={{ required: 'Informe o nome.' }}
+                render={({ field: { value, onChange } }) => (
+                  <Input
+                    placeholder="Nome"
+                    autoComplete="name"
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
               />
-              <Input placeholder="Senha" secureTextEntry />
 
-              <Button>Criar e acessar</Button>
+              <Controller
+                control={control}
+                name="email"
+                rules={{
+                  required: 'Informe o e-mail.',
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: 'Informe um e-mail válido.',
+                  },
+                }}
+                render={({ field: { value, onChange } }) => (
+                  <Input
+                    placeholder="E-mail"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoComplete="email"
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
+              />
+
+              <Controller
+                control={control}
+                name="password"
+                rules={{
+                  required: 'Informe a senha.',
+                  minLength: {
+                    value: 6,
+                    message: 'A senha deve ter no mínimo 6 caracteres.',
+                  },
+                }}
+                render={({ field: { value, onChange } }) => (
+                  <Input
+                    placeholder="Senha"
+                    secureTextEntry
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
+              />
+
+              <Button onPress={handleSubmit(onSubmit)}>Criar e acessar</Button>
             </Box>
 
             <Box px="$4" mt="auto" alignItems="center">
